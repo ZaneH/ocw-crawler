@@ -50,7 +50,7 @@ class OCWSpider < Kimurai::Base
     date = term_detail[1]
     level = term_detail[2]
 
-    year = date.match(/(20\d{2})/)
+    year = date.match(/((?:19|20)\d{2})/)
     course[:year] = year ? year[1] : "N/A"
     course[:id] = id
     course[:date] = date
