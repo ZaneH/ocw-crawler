@@ -2,11 +2,11 @@ require 'kimurai'
 
 class OCWSpider < Kimurai::Base
   @name = "ocw_spider"
-  @engine = :selenium_chrome
+  @engine = :selenium_firefox
   @start_urls = ["https://ocw.mit.edu/search/?f=Lecture%20Videos"]
   @config = {
     user_agent: "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.84 Safari/537.36",
-    before_request: { delay: 1..4 }
+    before_request: { delay: 4..7 }
   }
 
   def parse(response, url:, data: {})
@@ -64,4 +64,5 @@ class OCWSpider < Kimurai::Base
   end
 end
 
+puts "> Crawl started. Please be patient..."
 OCWSpider.crawl!
