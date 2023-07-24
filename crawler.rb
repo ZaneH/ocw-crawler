@@ -3,10 +3,10 @@ require 'kimurai'
 class OCWSpider < Kimurai::Base
   @name = "ocw_spider"
   @engine = :selenium_firefox
-  @start_urls = ["https://ocw.mit.edu/search/?f=Lecture%20Videos"]
+  @start_urls = ["https://ocw.mit.edu/search/?f=Lecture%20Videos&s=-runs.best_start_date"]
   @config = {
     user_agent: "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.84 Safari/537.36",
-    before_request: { delay: 4..7 }
+    before_request: { delay: 1..4 }
   }
 
   def parse(response, url:, data: {})
@@ -14,7 +14,7 @@ class OCWSpider < Kimurai::Base
     count = response.xpath(search_result_path).count
 
     loop do
-      browser.execute_script("window.scrollBy(0, 10000)") ; sleep 2
+      browser.execute_script("window.scrollBy(0, 10000)") ; sleep 4
       response = browser.current_response
 
       new_count = response.xpath(search_result_path).count
@@ -51,7 +51,7 @@ class OCWSpider < Kimurai::Base
     level = term_detail[2]
 
     year = date.match(/(20\d{2})/)
-    course[:year] = year[1] if year
+    course[:year] = year ? year[1] : "N/A"
     course[:id] = id
     course[:date] = date
     course[:level] = level

@@ -7,13 +7,13 @@
 
 ## Description
 
-This is a simple crawler to export the available courses on [MIT OpenCourseWare](https://ocw.mit.edu/). The crawler will export the courses with video lectures as a CSV file.
+This is a simple crawler to save the available courses on [MIT OpenCourseWare](https://ocw.mit.edu/). This crawler will export the courses with video lectures as a CSV file.
 
-You can crawl different courses by changing the `@start_urls` in `crawler.rb`.
+You can crawl for courses other than video lectures by changing the `@start_urls` in `crawler.rb`.
 
 ## Docker Run (Recommended)
 
-This is the simplest way to run the crawler. It will run the crawler and export the results to `./results.csv` by using a Docker volume. 
+This is the simplest way to run the crawler. It will run the crawler and save the results in `results.csv` using a Docker volume. 
 
 ```bash
 $ docker build -t ocw-crawl:1.0 .
@@ -27,22 +27,20 @@ $ docker run --volume $(pwd)/results.csv:/app/results.csv \
 
 ## Manually Run
 
-To run the crawler without Docker, you'll need to install an older version of Ruby that's compatible with `kimurai`. You'll also need `chromedriver` or a similar driver installed on your system.
+To run the crawler without Docker, you'll need to install an older version of Ruby that's compatible with `kimurai`. You'll also need `geckodriver` and Firefox. Read more about setting up `kimurai` [here](https://github.com/vifreefly/kimuraframework#installation) if you run into trouble.
 
 ### Setup
 
-Install Ruby 2.5.0 and run `bundle install`. Read more about setting up `kimurai` [here](https://github.com/vifreefly/kimuraframework#installation) if you run into trouble.
+Install Ruby 2.5.0 and run `bundle install`.
 
 ```bash
 $ asdf install ruby 2.5.0
 $ asdf global ruby 2.5.0
 $ gem install bundler
-$ bundle install
+$ bundle install # install dependencies
 ```
 
 ### Run
-
-Running the program will override the `results.csv` file. Takes ~25min to crawl all of the video courses. There is a 4 to 7 second delay between each request for politeness.
 
 ```bash
 $ ruby crawler.rb
