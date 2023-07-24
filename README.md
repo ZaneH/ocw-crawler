@@ -47,3 +47,16 @@ $ bundle install # install dependencies
 $ ruby crawler.rb
 ...
 ```
+
+## Possible Improvements
+
+- Use [OCW Sitemaps](https://ocw.mit.edu/sitemap.xml) to crawl all courses
+- Get more information about each course from the sitemap
+    - Course materials often follow these patterns:
+        - Syllabus: `/pages/syllabus/`
+        - Course download: `/download/`
+        - Resources: `/resources/*/`
+            - PDFs, slides, lectures notes, etc.
+        - Course pages: `/pages/*/`
+            - Readings: `/pages/readings/`
+- Turn the data into an app or API
